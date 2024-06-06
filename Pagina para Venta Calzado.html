@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUFINA SHOES</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #ff6f61;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 3px solid #ff9a8b;
+            position: relative;
+        }
+        header h2 {
+            margin: 0;
+            font-size: 1.4em;
+            font-weight: normal;
+        }
+        header h1 {
+            margin: 10px 0;
+            font-size: 2.2em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        header p {
+            margin: 0;
+            font-size: 1em;
+            color: #ffdedb;
+        }
+        header .cart-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: center;
+        }
+        header .cart {
+            font-size: 1.5em;
+            cursor: pointer;
+            position: relative;
+        }
+        header .cart span {
+            background-color: #ff9a8b;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 0.9em;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+        header .checkout-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        header .checkout-btn:hover {
+            background-color: #ff9a8b;
+            transform: scale(1.05);
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .product {
+            flex: 0 1 calc(33.333% - 20px);
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .product h2 {
+            margin: 0;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #aeafae;
+        }
+        .product p {
+            margin: 5px 0 10px;
+            font-size: 1em;
+            color: #777;
+        }
+        .product button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .product button:hover {
+            background-color: #ff9a8b;
+            transform: scale(1.05);
+        }
+        /* Estilos para el modal */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: nonec;
+            cursor: pointer;
+        }
+        .modal form {
+            display: flex;
+            flex-direction: column;
+        }
+        .modal form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .modal form button {
+            padding: 10px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .modal form button:hover {
+            background-color: #ff9a8b;
+            transform: scale(1.05);
+        }
+        /* Estilo para centrar texto */
+        .center-text {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Tienda de Calzado Femenino</h2>
+        <h1>RUFINA</h1>
+        <p>Encuentra los mejores zapatos</p>
+        <div class="cart-container">
+            <div class="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <button class="checkout-btn" onclick="finalizarCompra()">Finalizar compra</button>
+        </div>
+    </header>
+    <div class="container">
+        <!-- Ingreso los Productos -->
+        <div class="product">
+            <img src="C:\Users\Jose\Downloads\Designer (1).jpeg" alt="Zapato 1">
+            <h2>Zapato Elegante</h2>
+            <p>Precio: $50.00</p>
+            <button onclick="addToCart()">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\Jose\Downloads\Designer (2).jpeg" alt="Zapato 2">
+            <h2>Zapato Casual</h2>
+            <p>Precio: $40.00</p>
+            <button onclick="addToCart()">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\Jose\Downloads\003.jpg" alt="Zapato 3">
+            <h2>Zapatillas Deportivas</h2>
+            <p>Precio: $60.00</p>
+            <button onclick="addToCart()">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\Jose\Downloads\Calzado16.jpg" alt="Zapato 4">
+            <h2>Zapatillas Deportivas</h2>
+            <p>Precio: $120.00</p>
+            <button onclick="addToCart()">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\Jose\Downloads\Calzado17.jpg" alt="Zapato 5">
+            <h2>Zapatillas Deportivas</h2>
+            <p>Precio: $120.00</p>
+            <button onclick="addToCart()">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\Jose\Downloads\Calzado18.jpg" alt="Zapato 6">
+            <h2>Zapatillas Deportivas</h2>
+            <p>Precio: $120.00</p>
+            <button onclick="addToCart()">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <img src="C:\Users\Jose\Downloads\Calzado16.jpg" alt="Zapato 7">
+            <h2>Zapatillas Deportivas</h2>
+            <p>Precio: $120.00</p>
+            <button onclick="addToCart()">Agregar al carrito</button>
+        </div>
+    </div>
+
+    <!-- Modal del formulario de contacto -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <form id="contact-form">
+                <h3>Ingrese sus Datos para Finalizar</h3>
+                <input type="text" id="name" name="name" placeholder="Nombre" required>
+                <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+                <input type="tel" id="phone" name="phone" placeholder="WhatsApp" required>
+                <input type="mail" id="mail" name="mail" placeholder="Correo Electronico" required>
+                <button type="submit">Enviar</button>
+                <h6>* Pronto recibira por WhatsApp el link de pago con el detalle de su compra</h6>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let cartCount = 0;
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        function finalizarCompra() {
+            if (cartCount > 0) {
+                document.getElementById('contact-modal').style.display = 'block';
+            } else {
+                alert('El carrito está vacío.');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('contact-modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('contact-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Formulario enviado con éxito');
+            closeModal();
+        });
+    </script>
+</body>
+</html>
